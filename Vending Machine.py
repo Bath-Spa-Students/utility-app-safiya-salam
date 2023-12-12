@@ -1,16 +1,22 @@
 import pyfiglet
 
 def print_figlet_with_border(text):
+    # Convert the input text to ASCII art using pyfiglet
     figlet_text = pyfiglet.figlet_format(text)
+    # Create a border made of '*' characters
     border = '*' * (len(figlet_text.split('\n')[0]) + 4)
 
+    # Print the border
     print(border)
+    # Print each line of the ASCII art with '*' borders
     for line in figlet_text.split('\n'):
         print(f'* {line} *')
+    # Print the border
     print(border)
 
 # Example usage:
-text_to_print = "Vending Mechine"
+text_to_print = "vending machine"
+# Print the ASCII art with a border
 print_figlet_with_border(text_to_print)
 
 import pandas as pd
@@ -35,10 +41,10 @@ categories = {
 
 from prettytable import PrettyTable
 
-# Create a PrettyTable object
+# Create a PrettyTable object for displaying data in a tabular format
 table = PrettyTable()
 
-# Define the column names
+# Define the column names for the table
 table.field_names = ["Product", "Code", "Price", "Stock"]
 
 # Add rows to the table for the "Chocolates" category
@@ -51,33 +57,29 @@ chocolates_data = {
 for product, details in chocolates_data.items():
     table.add_row([product, details["code"], details["price"], details["stock"]])
 
-# Print the table
-print("chocolates")
+# Print the table for chocolates
+print("Chocolates")
 print(table)
 
-from prettytable import PrettyTable
-
-# Create a PrettyTable object
+# Create a PrettyTable object for the "Soft drinks" category
 table = PrettyTable()
 
-# Define the column names
+# Define the column names for the table
 table.field_names = ["Product", "Code", "Price", "Stock"]
 
-# Add rows to the table
+# Add rows to the table for the "Soft drinks" category
 table.add_row(["Coca Cola", "D", 2.5, 9])
 table.add_row(["Dr. Pepper", "E", 7.5, 4])
 table.add_row(["Fanta", "F", 3.75, 5])
 
-# Print the table
+# Print the table for soft drinks
 print("Soft drinks")
 print(table)
 
-from prettytable import PrettyTable
-
-# Create a PrettyTable object
+# Create a PrettyTable object for displaying data in a tabular format
 table = PrettyTable()
 
-# Define the column names
+# Define the column names for the table
 table.field_names = ["Product", "Code", "Price", "Stock"]
 
 # Add rows to the table for the "Snacks" category
@@ -90,32 +92,37 @@ snacks_data = {
 for product, details in snacks_data.items():
     table.add_row([product, details["code"], details["price"], details["stock"]])
 
-# Print the table
+# Print the table for snacks
 print("Snacks")
 print(table)
 
 def print_categories():
-        for category, items in categories.items():
-            (f"\nCategory: {category}")
+    # Iterate through categories and print details for each item
+    for category, items in categories.items():
+        print(f"\nCategory: {category}")
         for item, details in items.items():
-            (f"Item Name: {item} | Code: {details['code']} | Price: ${details['price']} | Stock: {details['stock']}")
+            print(f"Item Name: {item} | Code: {details['code']} | Price: ${details['price']} | Stock: {details['stock']}")
 
 def display_items():
+    # Display available items with categories
     print("\nAvailable items:")
     print_categories()
 
 class VendingMachine:
     def __init__(self, categories):
+        # Initialize the vending machine with categories and zero balance
         self.categories = categories
         self.balance = 0.0
 
     def print_categories(self):
+        # Print categories and items with their details
         for category, items in self.categories.items():
-            (f"\nCategory: {category}")
+            print(f"\nCategory: {category}")
             for item, details in items.items():
-                (f"Item Name: {item} | Code: {details['code']} | Price: ${details['price']} | Stock: {details['stock']}")
+                print(f"Item Name: {item} | Code: {details['code']} | Price: ${details['price']} | Stock: {details['stock']}")
 
     def accept_money(self):
+        # Accept money input from the user
         while True:
             try:
                 money = float(input("Insert money (enter 0 to cancel): $"))
@@ -130,6 +137,7 @@ class VendingMachine:
                 print("Invalid input. Please enter a valid number.")
 
     def select_item(self):
+        # Select an item to purchase by entering its code
         while True:
             selection = input("Enter the code of the item you want to purchase: ").upper()
             for category, items in self.categories.items():
@@ -138,6 +146,7 @@ class VendingMachine:
             print("Invalid selection. Please choose a valid item code.")
 
     def process_transaction(self, item_code, money):
+        # Process the transaction, dispense the item, and update stock and balance
         for category, items in self.categories.items():
             for item, details in items.items():
                 if item_code == details['code']:
@@ -155,8 +164,8 @@ class VendingMachine:
                         print(f"Sorry, {item} is out of stock. Please choose another item.")
                         return False
 
-
     def run(self):
+        # Main loop for running the vending machine
         while True:
             self.print_categories()
             item_code = self.select_item()
@@ -177,8 +186,6 @@ class VendingMachine:
                         print("Invalid input. Please enter 'yes' or 'no'.")
 
 if __name__ == "__main__":
+    # Create an instance of the VendingMachine class and run it
     vending_machine = VendingMachine(categories)
     vending_machine.run()
-
-
-
