@@ -1,4 +1,4 @@
-import pyfiglet
+import pyfiglet 
 
 def print_figlet_with_border(text):
     # Convert the input text to ASCII art using pyfiglet
